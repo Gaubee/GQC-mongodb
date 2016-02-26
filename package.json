@@ -1,24 +1,26 @@
 {
-  "name": "gqc-mongoose",
-  "version": "1.0.0",
-  "description": "GQ Mongodb Component. Base on mongoose",
+  "name": "gqc-mongodb",
+  "version": "1.1.0",
+  "description": "GQ Mongodb Component",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Gaubee/GQC-mongoose.git"
+    "url": "git+https://github.com/Gaubee/GQC-mongodb.git"
   },
   "keywords": [
     "GQ",
-    "mongodb",
-    "mongoose"
+    "mongodb"
   ],
   "author": "Gaubee",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Gaubee/GQC-mongoose/issues"
+    "url": "https://github.com/Gaubee/GQC-mongodb/issues"
   },
-  "homepage": "https://github.com/Gaubee/GQC-mongoose#readme"
+  "homepage": "https://github.com/Gaubee/GQC-mongodb#readme",
+  "dependencies": {
+    "mongodb": "^2.1.7"
+  }
 }

@@ -1,0 +1,2346 @@
+[{
+	"name": "new Collection",
+	"des": "Create a new Collection instance (INTERNAL TYPE, do not instantiate directly)",
+	"params": [],
+	"returns": [{
+		"type": "{Collection}"
+	}]
+}, {
+	"name": "aggregate",
+	"des": "Execute an aggregation framework pipeline against the collection, needs MongoDB >= 2.2",
+	"params": [{
+		"name": "pipeline",
+		"type": "object",
+		"default": "",
+		"des": "Array containing all the aggregation framework commands for the execution.",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "readPreference",
+			"type": "ReadPreference|string",
+			"default": "null",
+			"des": "The preferred read preference (ReadPreference.PRIMARY, ReadPreference.PRIMARY_PREFERRED, ReadPreference.SECONDARY, ReadPreference.SECONDARY_PREFERRED, ReadPreference.NEAREST).",
+			"properties": []
+		}, {
+			"name": "cursor",
+			"type": "object",
+			"default": "null",
+			"des": "Return the query as cursor, on 2.6 > it returns as a real cursor on pre 2.6 it returns as an emulated cursor.",
+			"properties": [{
+				"name": "batchSize",
+				"type": "number",
+				"default": "null",
+				"des": "The batchSize for the cursor",
+				"properties": []
+			}]
+		}, {
+			"name": "explain",
+			"type": "boolean",
+			"default": "false",
+			"des": "Explain returns the aggregation execution plan (requires mongodb 2.6 >).",
+			"properties": []
+		}, {
+			"name": "allowDiskUse",
+			"type": "boolean",
+			"default": "false",
+			"des": "allowDiskUse lets the server know if it can use disk to store temporary results for the aggregation (requires mongodb 2.6 >).",
+			"properties": []
+		}, {
+			"name": "maxTimeMS",
+			"type": "number",
+			"default": "null",
+			"des": "maxTimeMS specifies a cumulative time limit in milliseconds for processing operations on the cursor. MongoDB interrupts the operation at the earliest following interrupt point.",
+			"properties": []
+		}, {
+			"name": "bypassDocumentValidation",
+			"type": "boolean",
+			"default": "false",
+			"des": "Allow driver to bypass schema validation in MongoDB 3.2 or higher.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~resultCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{null|AggregationCursor}"
+	}]
+}, {
+	"name": "bulkWrite",
+	"des": "Perform a bulkWrite operation without a fluent API\nLegal operation types are\n { insertOne: { document: { a: 1 } } }\n { updateOne: { filter: {a:2}, update: {$set: {a:2}}, upsert:true } }\n { updateMany: { filter: {a:2}, update: {$set: {a:2}}, upsert:true } }\n { deleteOne: { filter: {c:1} } }\n { deleteMany: { filter: {c:1} } }\n { replaceOne: { filter: {c:3}, replacement: {c:4}, upsert:true}}\nIf documents passed in do not contain the _id field,\none will be added to each of the documents missing it by the driver, mutating the document. This behavior\ncan be overridden by setting the forceServerObjectId flag.",
+	"params": [{
+		"name": "operations",
+		"type": "Array.<object>",
+		"default": "",
+		"des": "Bulk operations to perform.",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "w",
+			"type": "number|string",
+			"default": "null",
+			"des": "The write concern.",
+			"properties": []
+		}, {
+			"name": "wtimeout",
+			"type": "number",
+			"default": "null",
+			"des": "The write concern timeout.",
+			"properties": []
+		}, {
+			"name": "j",
+			"type": "boolean",
+			"default": "false",
+			"des": "Specify a journal write concern.",
+			"properties": []
+		}, {
+			"name": "serializeFunctions",
+			"type": "boolean",
+			"default": "false",
+			"des": "Serialize functions on any object.",
+			"properties": []
+		}, {
+			"name": "ordered",
+			"type": "boolean",
+			"default": "true",
+			"des": "Execute write operation in ordered or unordered fashion.",
+			"properties": []
+		}, {
+			"name": "bypassDocumentValidation",
+			"type": "boolean",
+			"default": "false",
+			"des": "Allow driver to bypass schema validation in MongoDB 3.2 or higher.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~bulkWriteOpCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "count",
+	"des": "Count number of matching documents in the db to a query.",
+	"params": [{
+		"name": "query",
+		"type": "object",
+		"default": "",
+		"des": "The query for the count.",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "limit",
+			"type": "boolean",
+			"default": "null",
+			"des": "The limit of documents to count.",
+			"properties": []
+		}, {
+			"name": "skip",
+			"type": "boolean",
+			"default": "null",
+			"des": "The number of documents to skip for the count.",
+			"properties": []
+		}, {
+			"name": "hint",
+			"type": "string",
+			"default": "null",
+			"des": "An index name hint for the query.",
+			"properties": []
+		}, {
+			"name": "readPreference",
+			"type": "ReadPreference|string",
+			"default": "null",
+			"des": "The preferred read preference (ReadPreference.PRIMARY, ReadPreference.PRIMARY_PREFERRED, ReadPreference.SECONDARY, ReadPreference.SECONDARY_PREFERRED, ReadPreference.NEAREST).",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~countCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "createIndex",
+	"des": "Creates an index on the db and collection collection.",
+	"params": [{
+		"name": "fieldOrSpec",
+		"type": "string|object",
+		"default": "",
+		"des": "Defines the index.",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "w",
+			"type": "number|string",
+			"default": "null",
+			"des": "The write concern.",
+			"properties": []
+		}, {
+			"name": "wtimeout",
+			"type": "number",
+			"default": "null",
+			"des": "The write concern timeout.",
+			"properties": []
+		}, {
+			"name": "j",
+			"type": "boolean",
+			"default": "false",
+			"des": "Specify a journal write concern.",
+			"properties": []
+		}, {
+			"name": "unique",
+			"type": "boolean",
+			"default": "false",
+			"des": "Creates an unique index.",
+			"properties": []
+		}, {
+			"name": "sparse",
+			"type": "boolean",
+			"default": "false",
+			"des": "Creates a sparse index.",
+			"properties": []
+		}, {
+			"name": "background",
+			"type": "boolean",
+			"default": "false",
+			"des": "Creates the index in the background, yielding whenever possible.",
+			"properties": []
+		}, {
+			"name": "dropDups",
+			"type": "boolean",
+			"default": "false",
+			"des": "A unique index cannot be created on a key that has pre-existing duplicate values. If you would like to create the index anyway, keeping the first document the database indexes and deleting all subsequent documents that have duplicate value",
+			"properties": []
+		}, {
+			"name": "min",
+			"type": "number",
+			"default": "null",
+			"des": "For geospatial indexes set the lower bound for the co-ordinates.",
+			"properties": []
+		}, {
+			"name": "max",
+			"type": "number",
+			"default": "null",
+			"des": "For geospatial indexes set the high bound for the co-ordinates.",
+			"properties": []
+		}, {
+			"name": "v",
+			"type": "number",
+			"default": "null",
+			"des": "Specify the format version of the indexes.",
+			"properties": []
+		}, {
+			"name": "expireAfterSeconds",
+			"type": "number",
+			"default": "null",
+			"des": "Allows you to expire data on indexes applied to a data (MongoDB 2.2 or higher)",
+			"properties": []
+		}, {
+			"name": "name",
+			"type": "number",
+			"default": "null",
+			"des": "Override the autogenerated index name (useful if the resulting name is larger than 128 bytes)",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~resultCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "createIndexes",
+	"des": "Creates multiple indexes in the collection, this method is only supported for\nMongoDB 2.6 or higher. Earlier version of MongoDB will throw a command not supported\nerror. Index specifications are defined at http://docs.mongodb.org/manual/reference/command/createIndexes/.",
+	"params": [{
+		"name": "indexSpecs",
+		"type": "array",
+		"default": "",
+		"des": "An array of index specifications to be created",
+		"properties": []
+	}, {
+		"name": "callback",
+		"type": "Collection~resultCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "deleteMany",
+	"des": "Delete multiple documents on MongoDB",
+	"params": [{
+		"name": "filter",
+		"type": "object",
+		"default": "",
+		"des": "The Filter used to select the documents to remove",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "w",
+			"type": "number|string",
+			"default": "null",
+			"des": "The write concern.",
+			"properties": []
+		}, {
+			"name": "wtimeout",
+			"type": "number",
+			"default": "null",
+			"des": "The write concern timeout.",
+			"properties": []
+		}, {
+			"name": "j",
+			"type": "boolean",
+			"default": "false",
+			"des": "Specify a journal write concern.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~deleteWriteOpCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "deleteOne",
+	"des": "Delete a document on MongoDB",
+	"params": [{
+		"name": "filter",
+		"type": "object",
+		"default": "",
+		"des": "The Filter used to select the document to remove",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "w",
+			"type": "number|string",
+			"default": "null",
+			"des": "The write concern.",
+			"properties": []
+		}, {
+			"name": "wtimeout",
+			"type": "number",
+			"default": "null",
+			"des": "The write concern timeout.",
+			"properties": []
+		}, {
+			"name": "j",
+			"type": "boolean",
+			"default": "false",
+			"des": "Specify a journal write concern.",
+			"properties": []
+		}, {
+			"name": "bypassDocumentValidation",
+			"type": "boolean",
+			"default": "false",
+			"des": "Allow driver to bypass schema validation in MongoDB 3.2 or higher.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~deleteWriteOpCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "distinct",
+	"des": "The distinct command returns returns a list of distinct values for the given key across a collection.",
+	"params": [{
+		"name": "key",
+		"type": "string",
+		"default": "",
+		"des": "Field of the document to find distinct values for.",
+		"properties": []
+	}, {
+		"name": "query",
+		"type": "object",
+		"default": "",
+		"des": "The query for filtering the set of documents to which we apply the distinct filter.",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "readPreference",
+			"type": "ReadPreference|string",
+			"default": "null",
+			"des": "The preferred read preference (ReadPreference.PRIMARY, ReadPreference.PRIMARY_PREFERRED, ReadPreference.SECONDARY, ReadPreference.SECONDARY_PREFERRED, ReadPreference.NEAREST).",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~resultCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "drop",
+	"des": "Drop the collection from the database, removing it permanently. New accesses will create a new collection.",
+	"params": [{
+		"name": "callback",
+		"type": "Collection~resultCallback",
+		"default": "",
+		"des": "The results callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "dropAllIndexes",
+	"des": "Drops all indexes from this collection.",
+	"params": [{
+		"name": "callback",
+		"type": "Collection~resultCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "dropIndex",
+	"des": "Drops an index from this collection.",
+	"params": [{
+		"name": "indexName",
+		"type": "string",
+		"default": "",
+		"des": "Name of the index to drop.",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "w",
+			"type": "number|string",
+			"default": "null",
+			"des": "The write concern.",
+			"properties": []
+		}, {
+			"name": "wtimeout",
+			"type": "number",
+			"default": "null",
+			"des": "The write concern timeout.",
+			"properties": []
+		}, {
+			"name": "j",
+			"type": "boolean",
+			"default": "false",
+			"des": "Specify a journal write concern.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~resultCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "dropIndexes",
+	"des": "Drops all indexes from this collection.",
+	"params": [{
+		"name": "callback",
+		"type": "Collection~resultCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "ensureIndex",
+	"des": "Ensures that an index exists, if it does not it creates it",
+	"params": [{
+		"name": "fieldOrSpec",
+		"type": "string|object",
+		"default": "",
+		"des": "Defines the index.",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "w",
+			"type": "number|string",
+			"default": "null",
+			"des": "The write concern.",
+			"properties": []
+		}, {
+			"name": "wtimeout",
+			"type": "number",
+			"default": "null",
+			"des": "The write concern timeout.",
+			"properties": []
+		}, {
+			"name": "j",
+			"type": "boolean",
+			"default": "false",
+			"des": "Specify a journal write concern.",
+			"properties": []
+		}, {
+			"name": "unique",
+			"type": "boolean",
+			"default": "false",
+			"des": "Creates an unique index.",
+			"properties": []
+		}, {
+			"name": "sparse",
+			"type": "boolean",
+			"default": "false",
+			"des": "Creates a sparse index.",
+			"properties": []
+		}, {
+			"name": "background",
+			"type": "boolean",
+			"default": "false",
+			"des": "Creates the index in the background, yielding whenever possible.",
+			"properties": []
+		}, {
+			"name": "dropDups",
+			"type": "boolean",
+			"default": "false",
+			"des": "A unique index cannot be created on a key that has pre-existing duplicate values. If you would like to create the index anyway, keeping the first document the database indexes and deleting all subsequent documents that have duplicate value",
+			"properties": []
+		}, {
+			"name": "min",
+			"type": "number",
+			"default": "null",
+			"des": "For geospatial indexes set the lower bound for the co-ordinates.",
+			"properties": []
+		}, {
+			"name": "max",
+			"type": "number",
+			"default": "null",
+			"des": "For geospatial indexes set the high bound for the co-ordinates.",
+			"properties": []
+		}, {
+			"name": "v",
+			"type": "number",
+			"default": "null",
+			"des": "Specify the format version of the indexes.",
+			"properties": []
+		}, {
+			"name": "expireAfterSeconds",
+			"type": "number",
+			"default": "null",
+			"des": "Allows you to expire data on indexes applied to a data (MongoDB 2.2 or higher)",
+			"properties": []
+		}, {
+			"name": "name",
+			"type": "number",
+			"default": "null",
+			"des": "Override the autogenerated index name (useful if the resulting name is larger than 128 bytes)",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~resultCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "find",
+	"des": "Creates a cursor for a query that can be used to iterate over results from MongoDB",
+	"params": [{
+		"name": "query",
+		"type": "object",
+		"default": "",
+		"des": "The cursor query object.",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Cursor}"
+	}]
+}, {
+	"name": "findAndModify",
+	"des": "Find and update a document.",
+	"params": [{
+		"name": "query",
+		"type": "object",
+		"default": "",
+		"des": "Query object to locate the object to modify.",
+		"properties": []
+	}, {
+		"name": "sort",
+		"type": "array",
+		"default": "",
+		"des": "If multiple docs match, choose the first one in the specified sort order as the object to manipulate.",
+		"properties": []
+	}, {
+		"name": "doc",
+		"type": "object",
+		"default": "",
+		"des": "The fields/vals to be updated.",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "w",
+			"type": "number|string",
+			"default": "null",
+			"des": "The write concern.",
+			"properties": []
+		}, {
+			"name": "wtimeout",
+			"type": "number",
+			"default": "null",
+			"des": "The write concern timeout.",
+			"properties": []
+		}, {
+			"name": "j",
+			"type": "boolean",
+			"default": "false",
+			"des": "Specify a journal write concern.",
+			"properties": []
+		}, {
+			"name": "remove",
+			"type": "boolean",
+			"default": "false",
+			"des": "Set to true to remove the object before returning.",
+			"properties": []
+		}, {
+			"name": "upsert",
+			"type": "boolean",
+			"default": "false",
+			"des": "Perform an upsert operation.",
+			"properties": []
+		}, {
+			"name": "new",
+			"type": "boolean",
+			"default": "false",
+			"des": "Set to true if you want to return the modified object rather than the original. Ignored for remove.",
+			"properties": []
+		}, {
+			"name": "fields",
+			"type": "object",
+			"default": "null",
+			"des": "Object containing the field projection for the result returned from the operation.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~resultCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "findAndRemove",
+	"des": "Find and remove a document.",
+	"params": [{
+		"name": "query",
+		"type": "object",
+		"default": "",
+		"des": "Query object to locate the object to modify.",
+		"properties": []
+	}, {
+		"name": "sort",
+		"type": "array",
+		"default": "",
+		"des": "If multiple docs match, choose the first one in the specified sort order as the object to manipulate.",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "w",
+			"type": "number|string",
+			"default": "null",
+			"des": "The write concern.",
+			"properties": []
+		}, {
+			"name": "wtimeout",
+			"type": "number",
+			"default": "null",
+			"des": "The write concern timeout.",
+			"properties": []
+		}, {
+			"name": "j",
+			"type": "boolean",
+			"default": "false",
+			"des": "Specify a journal write concern.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~resultCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "findOne",
+	"des": "Fetches the first document that matches the query",
+	"params": [{
+		"name": "query",
+		"type": "object",
+		"default": "",
+		"des": "Query for find Operation",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "limit",
+			"type": "number",
+			"default": "0",
+			"des": "Sets the limit of documents returned in the query.",
+			"properties": []
+		}, {
+			"name": "sort",
+			"type": "array|object",
+			"default": "null",
+			"des": "Set to sort the documents coming back from the query. Array of indexes, [['a', 1]] etc.",
+			"properties": []
+		}, {
+			"name": "fields",
+			"type": "object",
+			"default": "null",
+			"des": "The fields to return in the query. Object of fields to include or exclude (not both), {'a':1}",
+			"properties": []
+		}, {
+			"name": "skip",
+			"type": "number",
+			"default": "0",
+			"des": "Set to skip N documents ahead in your query (useful for pagination).",
+			"properties": []
+		}, {
+			"name": "hint",
+			"type": "Object",
+			"default": "null",
+			"des": "Tell the query to use specific indexes in the query. Object of indexes to use, {'_id':1}",
+			"properties": []
+		}, {
+			"name": "explain",
+			"type": "boolean",
+			"default": "false",
+			"des": "Explain the query instead of returning the data.",
+			"properties": []
+		}, {
+			"name": "snapshot",
+			"type": "boolean",
+			"default": "false",
+			"des": "Snapshot query.",
+			"properties": []
+		}, {
+			"name": "timeout",
+			"type": "boolean",
+			"default": "false",
+			"des": "Specify if the cursor can timeout.",
+			"properties": []
+		}, {
+			"name": "tailable",
+			"type": "boolean",
+			"default": "false",
+			"des": "Specify if the cursor is tailable.",
+			"properties": []
+		}, {
+			"name": "batchSize",
+			"type": "number",
+			"default": "0",
+			"des": "Set the batchSize for the getMoreCommand when iterating over the query results.",
+			"properties": []
+		}, {
+			"name": "returnKey",
+			"type": "boolean",
+			"default": "false",
+			"des": "Only return the index key.",
+			"properties": []
+		}, {
+			"name": "maxScan",
+			"type": "number",
+			"default": "null",
+			"des": "Limit the number of items to scan.",
+			"properties": []
+		}, {
+			"name": "min",
+			"type": "number",
+			"default": "null",
+			"des": "Set index bounds.",
+			"properties": []
+		}, {
+			"name": "max",
+			"type": "number",
+			"default": "null",
+			"des": "Set index bounds.",
+			"properties": []
+		}, {
+			"name": "showDiskLoc",
+			"type": "boolean",
+			"default": "false",
+			"des": "Show disk location of results.",
+			"properties": []
+		}, {
+			"name": "comment",
+			"type": "string",
+			"default": "null",
+			"des": "You can put a $comment field on a query to make looking in the profiler logs simpler.",
+			"properties": []
+		}, {
+			"name": "raw",
+			"type": "boolean",
+			"default": "false",
+			"des": "Return all BSON documents as Raw Buffer documents.",
+			"properties": []
+		}, {
+			"name": "readPreference",
+			"type": "ReadPreference|string",
+			"default": "null",
+			"des": "The preferred read preference (ReadPreference.PRIMARY, ReadPreference.PRIMARY_PREFERRED, ReadPreference.SECONDARY, ReadPreference.SECONDARY_PREFERRED, ReadPreference.NEAREST).",
+			"properties": []
+		}, {
+			"name": "partial",
+			"type": "boolean",
+			"default": "false",
+			"des": "Specify if the cursor should return partial results when querying against a sharded system",
+			"properties": []
+		}, {
+			"name": "maxTimeMS",
+			"type": "number",
+			"default": "null",
+			"des": "Number of miliseconds to wait before aborting the query.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~resultCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "findOneAndDelete",
+	"des": "Find a document and delete it in one atomic operation, requires a write lock for the duration of the operation.",
+	"params": [{
+		"name": "filter",
+		"type": "object",
+		"default": "",
+		"des": "Document selection filter.",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "projection",
+			"type": "object",
+			"default": "null",
+			"des": "Limits the fields to return for all matching documents.",
+			"properties": []
+		}, {
+			"name": "sort",
+			"type": "object",
+			"default": "null",
+			"des": "Determines which document the operation modifies if the query selects multiple documents.",
+			"properties": []
+		}, {
+			"name": "maxTimeMS",
+			"type": "number",
+			"default": "null",
+			"des": "The maximum amount of time to allow the query to run.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~findAndModifyCallback",
+		"default": "",
+		"des": "The collection result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "findOneAndReplace",
+	"des": "Find a document and replace it in one atomic operation, requires a write lock for the duration of the operation.",
+	"params": [{
+		"name": "filter",
+		"type": "object",
+		"default": "",
+		"des": "Document selection filter.",
+		"properties": []
+	}, {
+		"name": "replacement",
+		"type": "object",
+		"default": "",
+		"des": "Document replacing the matching document.",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "projection",
+			"type": "object",
+			"default": "null",
+			"des": "Limits the fields to return for all matching documents.",
+			"properties": []
+		}, {
+			"name": "sort",
+			"type": "object",
+			"default": "null",
+			"des": "Determines which document the operation modifies if the query selects multiple documents.",
+			"properties": []
+		}, {
+			"name": "maxTimeMS",
+			"type": "number",
+			"default": "null",
+			"des": "The maximum amount of time to allow the query to run.",
+			"properties": []
+		}, {
+			"name": "upsert",
+			"type": "boolean",
+			"default": "false",
+			"des": "Upsert the document if it does not exist.",
+			"properties": []
+		}, {
+			"name": "returnOriginal",
+			"type": "boolean",
+			"default": "true",
+			"des": "When false, returns the updated document rather than the original. The default is true.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~findAndModifyCallback",
+		"default": "",
+		"des": "The collection result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "findOneAndUpdate",
+	"des": "Find a document and update it in one atomic operation, requires a write lock for the duration of the operation.",
+	"params": [{
+		"name": "filter",
+		"type": "object",
+		"default": "",
+		"des": "Document selection filter.",
+		"properties": []
+	}, {
+		"name": "update",
+		"type": "object",
+		"default": "",
+		"des": "Update operations to be performed on the document",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "projection",
+			"type": "object",
+			"default": "null",
+			"des": "Limits the fields to return for all matching documents.",
+			"properties": []
+		}, {
+			"name": "sort",
+			"type": "object",
+			"default": "null",
+			"des": "Determines which document the operation modifies if the query selects multiple documents.",
+			"properties": []
+		}, {
+			"name": "maxTimeMS",
+			"type": "number",
+			"default": "null",
+			"des": "The maximum amount of time to allow the query to run.",
+			"properties": []
+		}, {
+			"name": "upsert",
+			"type": "boolean",
+			"default": "false",
+			"des": "Upsert the document if it does not exist.",
+			"properties": []
+		}, {
+			"name": "returnOriginal",
+			"type": "boolean",
+			"default": "true",
+			"des": "When false, returns the updated document rather than the original. The default is true.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~findAndModifyCallback",
+		"default": "",
+		"des": "The collection result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "geoHaystackSearch",
+	"des": "Execute a geo search using a geo haystack index on a collection.",
+	"params": [{
+		"name": "x",
+		"type": "number",
+		"default": "",
+		"des": "Point to search on the x axis, ensure the indexes are ordered in the same order.",
+		"properties": []
+	}, {
+		"name": "y",
+		"type": "number",
+		"default": "",
+		"des": "Point to search on the y axis, ensure the indexes are ordered in the same order.",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "readPreference",
+			"type": "ReadPreference|string",
+			"default": "null",
+			"des": "The preferred read preference (ReadPreference.PRIMARY, ReadPreference.PRIMARY_PREFERRED, ReadPreference.SECONDARY, ReadPreference.SECONDARY_PREFERRED, ReadPreference.NEAREST).",
+			"properties": []
+		}, {
+			"name": "maxDistance",
+			"type": "number",
+			"default": "null",
+			"des": "Include results up to maxDistance from the point.",
+			"properties": []
+		}, {
+			"name": "search",
+			"type": "object",
+			"default": "null",
+			"des": "Filter the results by a query.",
+			"properties": []
+		}, {
+			"name": "limit",
+			"type": "number",
+			"default": "false",
+			"des": "Max number of results to return.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~resultCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "geoNear",
+	"des": "Execute the geoNear command to search for items in the collection",
+	"params": [{
+		"name": "x",
+		"type": "number",
+		"default": "",
+		"des": "Point to search on the x axis, ensure the indexes are ordered in the same order.",
+		"properties": []
+	}, {
+		"name": "y",
+		"type": "number",
+		"default": "",
+		"des": "Point to search on the y axis, ensure the indexes are ordered in the same order.",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "readPreference",
+			"type": "ReadPreference|string",
+			"default": "null",
+			"des": "The preferred read preference (ReadPreference.PRIMARY, ReadPreference.PRIMARY_PREFERRED, ReadPreference.SECONDARY, ReadPreference.SECONDARY_PREFERRED, ReadPreference.NEAREST).",
+			"properties": []
+		}, {
+			"name": "num",
+			"type": "number",
+			"default": "null",
+			"des": "Max number of results to return.",
+			"properties": []
+		}, {
+			"name": "minDistance",
+			"type": "number",
+			"default": "null",
+			"des": "Include results starting at minDistance from a point (2.6 or higher)",
+			"properties": []
+		}, {
+			"name": "maxDistance",
+			"type": "number",
+			"default": "null",
+			"des": "Include results up to maxDistance from the point.",
+			"properties": []
+		}, {
+			"name": "distanceMultiplier",
+			"type": "number",
+			"default": "null",
+			"des": "Include a value to multiply the distances with allowing for range conversions.",
+			"properties": []
+		}, {
+			"name": "query",
+			"type": "object",
+			"default": "null",
+			"des": "Filter the results by a query.",
+			"properties": []
+		}, {
+			"name": "spherical",
+			"type": "boolean",
+			"default": "false",
+			"des": "Perform query using a spherical model.",
+			"properties": []
+		}, {
+			"name": "uniqueDocs",
+			"type": "boolean",
+			"default": "false",
+			"des": "The closest location in a document to the center of the search region will always be returned MongoDB > 2.X.",
+			"properties": []
+		}, {
+			"name": "includeLocs",
+			"type": "boolean",
+			"default": "false",
+			"des": "Include the location data fields in the top level of the results MongoDB > 2.X.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~resultCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "group",
+	"des": "Run a group command across a collection",
+	"params": [{
+		"name": "keys",
+		"type": "object|array|function|code",
+		"default": "",
+		"des": "An object, array or function expressing the keys to group by.",
+		"properties": []
+	}, {
+		"name": "condition",
+		"type": "object",
+		"default": "",
+		"des": "An optional condition that must be true for a row to be considered.",
+		"properties": []
+	}, {
+		"name": "initial",
+		"type": "object",
+		"default": "",
+		"des": "Initial value of the aggregation counter object.",
+		"properties": []
+	}, {
+		"name": "reduce",
+		"type": "function|Code",
+		"default": "",
+		"des": "The reduce function aggregates (reduces) the objects iterated",
+		"properties": []
+	}, {
+		"name": "finalize",
+		"type": "function|Code",
+		"default": "",
+		"des": "An optional function to be run on each item in the result set just before the item is returned.",
+		"properties": []
+	}, {
+		"name": "command",
+		"type": "boolean",
+		"default": "",
+		"des": "Specify if you wish to run using the internal group command or using eval, default is true.",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "readPreference",
+			"type": "ReadPreference|string",
+			"default": "null",
+			"des": "The preferred read preference (ReadPreference.PRIMARY, ReadPreference.PRIMARY_PREFERRED, ReadPreference.SECONDARY, ReadPreference.SECONDARY_PREFERRED, ReadPreference.NEAREST).",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~resultCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "indexes",
+	"des": "Retrieve all the indexes on the collection.",
+	"params": [{
+		"name": "callback",
+		"type": "Collection~resultCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "indexExists",
+	"des": "Checks if one or more indexes exist on the collection, fails on first non-existing index",
+	"params": [{
+		"name": "indexes",
+		"type": "string|array",
+		"default": "",
+		"des": "One or more index names to check.",
+		"properties": []
+	}, {
+		"name": "callback",
+		"type": "Collection~resultCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "indexInformation",
+	"des": "Retrieves this collections index info.",
+	"params": [{
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "full",
+			"type": "boolean",
+			"default": "false",
+			"des": "Returns the full raw index information.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~resultCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "initializeOrderedBulkOp",
+	"des": "Initiate an In order bulk write operation, operations will be serially executed in the order they are added, creating a new operation for each switch in types.",
+	"params": [{
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "w",
+			"type": "number|string",
+			"default": "null",
+			"des": "The write concern.",
+			"properties": []
+		}, {
+			"name": "wtimeout",
+			"type": "number",
+			"default": "null",
+			"des": "The write concern timeout.",
+			"properties": []
+		}, {
+			"name": "j",
+			"type": "boolean",
+			"default": "false",
+			"des": "Specify a journal write concern.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "OrderedBulkOperation",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{null}"
+	}]
+}, {
+	"name": "initializeUnorderedBulkOp",
+	"des": "Initiate a Out of order batch write operation. All operations will be buffered into insert/update/remove commands executed out of order.",
+	"params": [{
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "w",
+			"type": "number|string",
+			"default": "null",
+			"des": "The write concern.",
+			"properties": []
+		}, {
+			"name": "wtimeout",
+			"type": "number",
+			"default": "null",
+			"des": "The write concern timeout.",
+			"properties": []
+		}, {
+			"name": "j",
+			"type": "boolean",
+			"default": "false",
+			"des": "Specify a journal write concern.",
+			"properties": []
+		}]
+	}],
+	"returns": [{
+		"type": "{UnorderedBulkOperation}"
+	}]
+}, {
+	"name": "insert",
+	"des": "Inserts a single document or a an array of documents into MongoDB. If documents passed in do not contain the _id field,\none will be added to each of the documents missing it by the driver, mutating the document. This behavior\ncan be overridden by setting the forceServerObjectId flag.",
+	"params": [{
+		"name": "docs",
+		"type": "object|Array.<object>",
+		"default": "",
+		"des": "Documents to insert.",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "w",
+			"type": "number|string",
+			"default": "null",
+			"des": "The write concern.",
+			"properties": []
+		}, {
+			"name": "wtimeout",
+			"type": "number",
+			"default": "null",
+			"des": "The write concern timeout.",
+			"properties": []
+		}, {
+			"name": "j",
+			"type": "boolean",
+			"default": "false",
+			"des": "Specify a journal write concern.",
+			"properties": []
+		}, {
+			"name": "serializeFunctions",
+			"type": "boolean",
+			"default": "false",
+			"des": "Serialize functions on any object.",
+			"properties": []
+		}, {
+			"name": "forceServerObjectId",
+			"type": "boolean",
+			"default": "false",
+			"des": "Force server to assign _id values instead of driver.",
+			"properties": []
+		}, {
+			"name": "bypassDocumentValidation",
+			"type": "boolean",
+			"default": "false",
+			"des": "Allow driver to bypass schema validation in MongoDB 3.2 or higher.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~insertWriteOpCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "insertMany",
+	"des": "Inserts an array of documents into MongoDB. If documents passed in do not contain the _id field,\none will be added to each of the documents missing it by the driver, mutating the document. This behavior\ncan be overridden by setting the forceServerObjectId flag.",
+	"params": [{
+		"name": "docs",
+		"type": "Array.<object>",
+		"default": "",
+		"des": "Documents to insert.",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "w",
+			"type": "number|string",
+			"default": "null",
+			"des": "The write concern.",
+			"properties": []
+		}, {
+			"name": "wtimeout",
+			"type": "number",
+			"default": "null",
+			"des": "The write concern timeout.",
+			"properties": []
+		}, {
+			"name": "j",
+			"type": "boolean",
+			"default": "false",
+			"des": "Specify a journal write concern.",
+			"properties": []
+		}, {
+			"name": "serializeFunctions",
+			"type": "boolean",
+			"default": "false",
+			"des": "Serialize functions on any object.",
+			"properties": []
+		}, {
+			"name": "forceServerObjectId",
+			"type": "boolean",
+			"default": "false",
+			"des": "Force server to assign _id values instead of driver.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~insertWriteOpCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "insertOne",
+	"des": "Inserts a single document into MongoDB. If documents passed in do not contain the _id field,\none will be added to each of the documents missing it by the driver, mutating the document. This behavior\ncan be overridden by setting the forceServerObjectId flag.",
+	"params": [{
+		"name": "doc",
+		"type": "object",
+		"default": "",
+		"des": "Document to insert.",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "w",
+			"type": "number|string",
+			"default": "null",
+			"des": "The write concern.",
+			"properties": []
+		}, {
+			"name": "wtimeout",
+			"type": "number",
+			"default": "null",
+			"des": "The write concern timeout.",
+			"properties": []
+		}, {
+			"name": "j",
+			"type": "boolean",
+			"default": "false",
+			"des": "Specify a journal write concern.",
+			"properties": []
+		}, {
+			"name": "serializeFunctions",
+			"type": "boolean",
+			"default": "false",
+			"des": "Serialize functions on any object.",
+			"properties": []
+		}, {
+			"name": "forceServerObjectId",
+			"type": "boolean",
+			"default": "false",
+			"des": "Force server to assign _id values instead of driver.",
+			"properties": []
+		}, {
+			"name": "bypassDocumentValidation",
+			"type": "boolean",
+			"default": "false",
+			"des": "Allow driver to bypass schema validation in MongoDB 3.2 or higher.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~insertOneWriteOpCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "isCapped",
+	"des": "Returns if the collection is a capped collection",
+	"params": [{
+		"name": "callback",
+		"type": "Collection~resultCallback",
+		"default": "",
+		"des": "The results callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "listIndexes",
+	"des": "Get the list of all indexes information for the collection.",
+	"params": [{
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "batchSize",
+			"type": "number",
+			"default": "null",
+			"des": "The batchSize for the returned command cursor or if pre 2.8 the systems batch collection",
+			"properties": []
+		}, {
+			"name": "readPreference",
+			"type": "ReadPreference|string",
+			"default": "null",
+			"des": "The preferred read preference (ReadPreference.PRIMARY, ReadPreference.PRIMARY_PREFERRED, ReadPreference.SECONDARY, ReadPreference.SECONDARY_PREFERRED, ReadPreference.NEAREST).",
+			"properties": []
+		}]
+	}],
+	"returns": [{
+		"type": "{CommandCursor}"
+	}]
+}, {
+	"name": "mapReduce",
+	"des": "Run Map Reduce across a collection. Be aware that the inline option for out will return an array of results not a collection.",
+	"params": [{
+		"name": "map",
+		"type": "function|string",
+		"default": "",
+		"des": "The mapping function.",
+		"properties": []
+	}, {
+		"name": "reduce",
+		"type": "function|string",
+		"default": "",
+		"des": "The reduce function.",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "readPreference",
+			"type": "ReadPreference|string",
+			"default": "null",
+			"des": "The preferred read preference (ReadPreference.PRIMARY, ReadPreference.PRIMARY_PREFERRED, ReadPreference.SECONDARY, ReadPreference.SECONDARY_PREFERRED, ReadPreference.NEAREST).",
+			"properties": []
+		}, {
+			"name": "out",
+			"type": "object",
+			"default": "null",
+			"des": "Sets the output target for the map reduce job. {inline:1} | {replace:'collectionName'} | {merge:'collectionName'} | {reduce:'collectionName'}",
+			"properties": []
+		}, {
+			"name": "query",
+			"type": "object",
+			"default": "null",
+			"des": "Query filter object.",
+			"properties": []
+		}, {
+			"name": "sort",
+			"type": "object",
+			"default": "null",
+			"des": "Sorts the input objects using this key. Useful for optimization, like sorting by the emit key for fewer reduces.",
+			"properties": []
+		}, {
+			"name": "limit",
+			"type": "number",
+			"default": "null",
+			"des": "Number of objects to return from collection.",
+			"properties": []
+		}, {
+			"name": "keeptemp",
+			"type": "boolean",
+			"default": "false",
+			"des": "Keep temporary data.",
+			"properties": []
+		}, {
+			"name": "finalize",
+			"type": "function|string",
+			"default": "null",
+			"des": "Finalize function.",
+			"properties": []
+		}, {
+			"name": "scope",
+			"type": "object",
+			"default": "null",
+			"des": "Can pass in variables that can be access from map/reduce/finalize.",
+			"properties": []
+		}, {
+			"name": "jsMode",
+			"type": "boolean",
+			"default": "false",
+			"des": "It is possible to make the execution stay in JS. Provided in MongoDB > 2.0.X.",
+			"properties": []
+		}, {
+			"name": "verbose",
+			"type": "boolean",
+			"default": "false",
+			"des": "Provide statistics on job execution time.",
+			"properties": []
+		}, {
+			"name": "bypassDocumentValidation",
+			"type": "boolean",
+			"default": "false",
+			"des": "Allow driver to bypass schema validation in MongoDB 3.2 or higher.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~resultCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "options",
+	"des": "Returns the options of the collection.",
+	"params": [{
+		"name": "callback",
+		"type": "Collection~resultCallback",
+		"default": "",
+		"des": "The results callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "parallelCollectionScan",
+	"des": "Return N number of parallel cursors for a collection allowing parallel reading of entire collection. There are\nno ordering guarantees for returned results.",
+	"params": [{
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "readPreference",
+			"type": "ReadPreference|string",
+			"default": "null",
+			"des": "The preferred read preference (ReadPreference.PRIMARY, ReadPreference.PRIMARY_PREFERRED, ReadPreference.SECONDARY, ReadPreference.SECONDARY_PREFERRED, ReadPreference.NEAREST).",
+			"properties": []
+		}, {
+			"name": "batchSize",
+			"type": "number",
+			"default": "null",
+			"des": "Set the batchSize for the getMoreCommand when iterating over the query results.",
+			"properties": []
+		}, {
+			"name": "numCursors",
+			"type": "number",
+			"default": "1",
+			"des": "The maximum number of parallel command cursors to return (the number of returned cursors will be in the range 1:numCursors)",
+			"properties": []
+		}, {
+			"name": "raw",
+			"type": "boolean",
+			"default": "false",
+			"des": "Return all BSON documents as Raw Buffer documents.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~parallelCollectionScanCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "reIndex",
+	"des": "Reindex all indexes on the collection\nWarning: reIndex is a blocking operation (indexes are rebuilt in the foreground) and will be slow for large collections.",
+	"params": [{
+		"name": "callback",
+		"type": "Collection~resultCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "remove",
+	"des": "Remove documents.",
+	"params": [{
+		"name": "selector",
+		"type": "object",
+		"default": "",
+		"des": "The selector for the update operation.",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "w",
+			"type": "number|string",
+			"default": "null",
+			"des": "The write concern.",
+			"properties": []
+		}, {
+			"name": "wtimeout",
+			"type": "number",
+			"default": "null",
+			"des": "The write concern timeout.",
+			"properties": []
+		}, {
+			"name": "j",
+			"type": "boolean",
+			"default": "false",
+			"des": "Specify a journal write concern.",
+			"properties": []
+		}, {
+			"name": "single",
+			"type": "boolean",
+			"default": "false",
+			"des": "Removes the first document found.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~writeOpCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "rename",
+	"des": "Rename the collection.",
+	"params": [{
+		"name": "newName",
+		"type": "string",
+		"default": "",
+		"des": "New name of of the collection.",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "dropTarget",
+			"type": "boolean",
+			"default": "false",
+			"des": "Drop the target name collection if it previously exists.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~collectionResultCallback",
+		"default": "",
+		"des": "The results callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "replaceOne",
+	"des": "Replace a document on MongoDB",
+	"params": [{
+		"name": "filter",
+		"type": "object",
+		"default": "",
+		"des": "The Filter used to select the document to update",
+		"properties": []
+	}, {
+		"name": "doc",
+		"type": "object",
+		"default": "",
+		"des": "The Document that replaces the matching document",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "upsert",
+			"type": "boolean",
+			"default": "false",
+			"des": "Update operation is an upsert.",
+			"properties": []
+		}, {
+			"name": "w",
+			"type": "number|string",
+			"default": "null",
+			"des": "The write concern.",
+			"properties": []
+		}, {
+			"name": "wtimeout",
+			"type": "number",
+			"default": "null",
+			"des": "The write concern timeout.",
+			"properties": []
+		}, {
+			"name": "j",
+			"type": "boolean",
+			"default": "false",
+			"des": "Specify a journal write concern.",
+			"properties": []
+		}, {
+			"name": "bypassDocumentValidation",
+			"type": "boolean",
+			"default": "false",
+			"des": "Allow driver to bypass schema validation in MongoDB 3.2 or higher.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~updateWriteOpCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "save",
+	"des": "Save a document. Simple full document replacement function. Not recommended for efficiency, use atomic\noperators and update instead for more efficient operations.",
+	"params": [{
+		"name": "doc",
+		"type": "object",
+		"default": "",
+		"des": "Document to save",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "w",
+			"type": "number|string",
+			"default": "null",
+			"des": "The write concern.",
+			"properties": []
+		}, {
+			"name": "wtimeout",
+			"type": "number",
+			"default": "null",
+			"des": "The write concern timeout.",
+			"properties": []
+		}, {
+			"name": "j",
+			"type": "boolean",
+			"default": "false",
+			"des": "Specify a journal write concern.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~writeOpCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "stats",
+	"des": "Get all the collection statistics.",
+	"params": [{
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "scale",
+			"type": "number",
+			"default": "null",
+			"des": "Divide the returned sizes by scale value.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~resultCallback",
+		"default": "",
+		"des": "The collection result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "update",
+	"des": "Updates documents.",
+	"params": [{
+		"name": "selector",
+		"type": "object",
+		"default": "",
+		"des": "The selector for the update operation.",
+		"properties": []
+	}, {
+		"name": "document",
+		"type": "object",
+		"default": "",
+		"des": "The update document.",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "w",
+			"type": "number|string",
+			"default": "null",
+			"des": "The write concern.",
+			"properties": []
+		}, {
+			"name": "wtimeout",
+			"type": "number",
+			"default": "null",
+			"des": "The write concern timeout.",
+			"properties": []
+		}, {
+			"name": "j",
+			"type": "boolean",
+			"default": "false",
+			"des": "Specify a journal write concern.",
+			"properties": []
+		}, {
+			"name": "upsert",
+			"type": "boolean",
+			"default": "false",
+			"des": "Update operation is an upsert.",
+			"properties": []
+		}, {
+			"name": "multi",
+			"type": "boolean",
+			"default": "false",
+			"des": "Update one/all documents with operation.",
+			"properties": []
+		}, {
+			"name": "bypassDocumentValidation",
+			"type": "boolean",
+			"default": "false",
+			"des": "Allow driver to bypass schema validation in MongoDB 3.2 or higher.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~writeOpCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "updateMany",
+	"des": "Update multiple documents on MongoDB",
+	"params": [{
+		"name": "filter",
+		"type": "object",
+		"default": "",
+		"des": "The Filter used to select the document to update",
+		"properties": []
+	}, {
+		"name": "update",
+		"type": "object",
+		"default": "",
+		"des": "The update operations to be applied to the document",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "upsert",
+			"type": "boolean",
+			"default": "false",
+			"des": "Update operation is an upsert.",
+			"properties": []
+		}, {
+			"name": "w",
+			"type": "number|string",
+			"default": "null",
+			"des": "The write concern.",
+			"properties": []
+		}, {
+			"name": "wtimeout",
+			"type": "number",
+			"default": "null",
+			"des": "The write concern timeout.",
+			"properties": []
+		}, {
+			"name": "j",
+			"type": "boolean",
+			"default": "false",
+			"des": "Specify a journal write concern.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~updateWriteOpCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "updateOne",
+	"des": "Update a single document on MongoDB",
+	"params": [{
+		"name": "filter",
+		"type": "object",
+		"default": "",
+		"des": "The Filter used to select the document to update",
+		"properties": []
+	}, {
+		"name": "update",
+		"type": "object",
+		"default": "",
+		"des": "The update operations to be applied to the document",
+		"properties": []
+	}, {
+		"name": "options",
+		"type": "object",
+		"default": "null",
+		"des": "Optional settings.",
+		"properties": [{
+			"name": "upsert",
+			"type": "boolean",
+			"default": "false",
+			"des": "Update operation is an upsert.",
+			"properties": []
+		}, {
+			"name": "w",
+			"type": "number|string",
+			"default": "null",
+			"des": "The write concern.",
+			"properties": []
+		}, {
+			"name": "wtimeout",
+			"type": "number",
+			"default": "null",
+			"des": "The write concern timeout.",
+			"properties": []
+		}, {
+			"name": "j",
+			"type": "boolean",
+			"default": "false",
+			"des": "Specify a journal write concern.",
+			"properties": []
+		}, {
+			"name": "bypassDocumentValidation",
+			"type": "boolean",
+			"default": "false",
+			"des": "Allow driver to bypass schema validation in MongoDB 3.2 or higher.",
+			"properties": []
+		}]
+	}, {
+		"name": "callback",
+		"type": "Collection~updateWriteOpCallback",
+		"default": "",
+		"des": "The command result callback",
+		"properties": []
+	}],
+	"returns": [{
+		"type": "{Promise}"
+	}]
+}, {
+	"name": "bulkWriteOpCallback",
+	"des": "The callback format for inserts",
+	"params": [{
+		"name": "error",
+		"type": "MongoError",
+		"default": "",
+		"des": "An error instance representing the error during the execution.",
+		"properties": []
+	}, {
+		"name": "result",
+		"type": "Collection~BulkWriteOpResult",
+		"default": "",
+		"des": "The result object if the command was executed successfully.",
+		"properties": []
+	}],
+	"returns": []
+}, {
+	"name": "collectionResultCallback",
+	"des": "The callback format for the collection method, must be used if strict is specified",
+	"params": [{
+		"name": "error",
+		"type": "MongoError",
+		"default": "",
+		"des": "An error instance representing the error during the execution.",
+		"properties": []
+	}, {
+		"name": "collection",
+		"type": "Collection",
+		"default": "",
+		"des": "The collection instance.",
+		"properties": []
+	}],
+	"returns": []
+}, {
+	"name": "countCallback",
+	"des": "The callback format for results",
+	"params": [{
+		"name": "error",
+		"type": "MongoError",
+		"default": "",
+		"des": "An error instance representing the error during the execution.",
+		"properties": []
+	}, {
+		"name": "result",
+		"type": "number",
+		"default": "",
+		"des": "The count of documents that matched the query.",
+		"properties": []
+	}],
+	"returns": []
+}, {
+	"name": "deleteWriteOpCallback",
+	"des": "The callback format for inserts",
+	"params": [{
+		"name": "error",
+		"type": "MongoError",
+		"default": "",
+		"des": "An error instance representing the error during the execution.",
+		"properties": []
+	}, {
+		"name": "result",
+		"type": "Collection~deleteWriteOpResult",
+		"default": "",
+		"des": "The result object if the command was executed successfully.",
+		"properties": []
+	}],
+	"returns": []
+}, {
+	"name": "findAndModifyCallback",
+	"des": "The callback format for inserts",
+	"params": [{
+		"name": "error",
+		"type": "MongoError",
+		"default": "",
+		"des": "An error instance representing the error during the execution.",
+		"properties": []
+	}, {
+		"name": "result",
+		"type": "Collection~findAndModifyWriteOpResult",
+		"default": "",
+		"des": "The result object if the command was executed successfully.",
+		"properties": []
+	}],
+	"returns": []
+}, {
+	"name": "insertOneWriteOpCallback",
+	"des": "The callback format for inserts",
+	"params": [{
+		"name": "error",
+		"type": "MongoError",
+		"default": "",
+		"des": "An error instance representing the error during the execution.",
+		"properties": []
+	}, {
+		"name": "result",
+		"type": "Collection~insertOneWriteOpResult",
+		"default": "",
+		"des": "The result object if the command was executed successfully.",
+		"properties": []
+	}],
+	"returns": []
+}, {
+	"name": "insertWriteOpCallback",
+	"des": "The callback format for inserts",
+	"params": [{
+		"name": "error",
+		"type": "MongoError",
+		"default": "",
+		"des": "An error instance representing the error during the execution.",
+		"properties": []
+	}, {
+		"name": "result",
+		"type": "Collection~insertWriteOpResult",
+		"default": "",
+		"des": "The result object if the command was executed successfully.",
+		"properties": []
+	}],
+	"returns": []
+}, {
+	"name": "parallelCollectionScanCallback",
+	"des": "The callback format for results",
+	"params": [{
+		"name": "error",
+		"type": "MongoError",
+		"default": "",
+		"des": "An error instance representing the error during the execution.",
+		"properties": []
+	}, {
+		"name": "cursors",
+		"type": "Array.<Cursor>",
+		"default": "",
+		"des": "A list of cursors returned allowing for parallel reading of collection.",
+		"properties": []
+	}],
+	"returns": []
+}, {
+	"name": "resultCallback",
+	"des": "The callback format for results",
+	"params": [{
+		"name": "error",
+		"type": "MongoError",
+		"default": "",
+		"des": "An error instance representing the error during the execution.",
+		"properties": []
+	}, {
+		"name": "result",
+		"type": "object",
+		"default": "",
+		"des": "The result object if the command was executed successfully.",
+		"properties": []
+	}],
+	"returns": []
+}, {
+	"name": "updateWriteOpCallback",
+	"des": "The callback format for inserts",
+	"params": [{
+		"name": "error",
+		"type": "MongoError",
+		"default": "",
+		"des": "An error instance representing the error during the execution.",
+		"properties": []
+	}, {
+		"name": "result",
+		"type": "Collection~updateWriteOpResult",
+		"default": "",
+		"des": "The result object if the command was executed successfully.",
+		"properties": []
+	}],
+	"returns": []
+}, {
+	"name": "writeOpCallback",
+	"des": "The callback format for inserts",
+	"params": [{
+		"name": "error",
+		"type": "MongoError",
+		"default": "",
+		"des": "An error instance representing the error during the execution.",
+		"properties": []
+	}, {
+		"name": "result",
+		"type": "Collection~WriteOpResult",
+		"default": "",
+		"des": "The result object if the command was executed successfully.",
+		"properties": []
+	}],
+	"returns": []
+}]
