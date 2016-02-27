@@ -23,7 +23,7 @@ const client = tcp.createClient({
 		// console.log(_insert);
 
 		console.log(yield clo.find({}).toArray());
-		// console.log(yield clo.find({}).limit(2).skip(2).toArray());
+		console.log(yield clo.find({}).limit(2).skip(2).toArray());
 
 		// yield cursor.destroy();
 		yield clo.destroy();
@@ -32,6 +32,7 @@ const client = tcp.createClient({
 	} catch (err) {
 
 		console.log(err);
+		process.exit(0);
 	}
 
 }));

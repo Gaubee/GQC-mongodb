@@ -74,7 +74,14 @@ function install(client) {
 		CursorMethodsWithPromiseDoc.reduce(function(proto, method_info) {
 			proto[method_info.name] = function() {
 				return this[cursor_instance].then((cursor_proxy) => {
-					return cursor_proxy[method_info.name].apply(cursor_proxy, arguments)
+					return cursor_proxy[method_info.name].apply(cursor_proxy, arguments).then(cursor_res => {
+						// 执行销毁
+						return cursor_proxy.destroy().then(() => {
+							// 返回Promise结果
+							return cursor_res;
+						});
+
+					});
 				});
 			};
 			return proto;
