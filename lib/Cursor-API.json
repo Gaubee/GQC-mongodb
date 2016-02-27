@@ -57,13 +57,6 @@
 		"type": "{Cursor}"
 	}]
 }, {
-	"name": "",
-	"des": "Clone the cursor",
-	"params": [],
-	"returns": [{
-		"type": "{Cursor}"
-	}]
-}, {
 	"name": "close",
 	"des": "Close the cursor, sending a KillCursor command and emitting close.",
 	"params": [{
@@ -340,32 +333,6 @@
 		"type": "{Promise}"
 	}]
 }, {
-	"name": "",
-	"des": "This method will cause a stream in flowing-mode to stop emitting data events. Any data that becomes available will remain in the internal buffer.",
-	"params": [],
-	"returns": [{
-		"type": "{null}"
-	}]
-}, {
-	"name": "",
-	"des": "This method pulls all the data out of a readable stream, and writes it to the supplied destination, automatically managing the flow so that the destination is not overwhelmed by a fast readable stream.",
-	"params": [{
-		"name": "destination",
-		"type": "Writable",
-		"default": "",
-		"des": "The destination for writing data",
-		"properties": []
-	}, {
-		"name": "options",
-		"type": "object",
-		"default": "",
-		"des": "Pipe options",
-		"properties": []
-	}],
-	"returns": [{
-		"type": "{null}"
-	}]
-}, {
 	"name": "project",
 	"des": "Sets a field projection for the query.",
 	"params": [{
@@ -379,26 +346,6 @@
 		"type": "{Cursor}"
 	}]
 }, {
-	"name": "",
-	"des": "The read() method pulls some data out of the internal buffer and returns it. If there is no data available, then it will return null.",
-	"params": [{
-		"name": "size",
-		"type": "number",
-		"default": "",
-		"des": "Optional argument to specify how much data to read.",
-		"properties": []
-	}],
-	"returns": [{
-		"type": "{String|Buffer|null}"
-	}]
-}, {
-	"name": "",
-	"des": "This method will cause the readable stream to resume emitting data events.",
-	"params": [],
-	"returns": [{
-		"type": "{null}"
-	}]
-}, {
 	"name": "returnKey",
 	"des": "Set the cursor returnKey",
 	"params": [{
@@ -410,13 +357,6 @@
 	}],
 	"returns": [{
 		"type": "{Cursor}"
-	}]
-}, {
-	"name": "",
-	"des": "Resets the cursor",
-	"params": [],
-	"returns": [{
-		"type": "{null}"
 	}]
 }, {
 	"name": "setCursorOption",
@@ -436,19 +376,6 @@
 	}],
 	"returns": [{
 		"type": "{Cursor}"
-	}]
-}, {
-	"name": "",
-	"des": "Call this function to cause the stream to return strings of the specified encoding instead of Buffer objects.",
-	"params": [{
-		"name": "encoding",
-		"type": "string",
-		"default": "",
-		"des": "The encoding to use.",
-		"properties": []
-	}],
-	"returns": [{
-		"type": "{null}"
 	}]
 }, {
 	"name": "setReadPreference",
@@ -552,45 +479,6 @@
 	}],
 	"returns": [{
 		"type": "{Promise}"
-	}]
-}, {
-	"name": "",
-	"des": "This method will remove the hooks set up for a previous pipe() call.",
-	"params": [{
-		"name": "destination",
-		"type": "Writable",
-		"default": "",
-		"des": "The destination for writing data",
-		"properties": []
-	}],
-	"returns": [{
-		"type": "{null}"
-	}]
-}, {
-	"name": "",
-	"des": "This is useful in certain cases where a stream is being consumed by a parser, which needs to \"un-consume\" some data that it has optimistically pulled out of the source, so that the stream can be passed on to some other party.",
-	"params": [{
-		"name": "chunk",
-		"type": "Buffer|string",
-		"default": "",
-		"des": "Chunk of data to unshift onto the read queue.",
-		"properties": []
-	}],
-	"returns": [{
-		"type": "{null}"
-	}]
-}, {
-	"name": "",
-	"des": "Versions of Node prior to v0.10 had streams that did not implement the entire Streams API as it is today. (See \"Compatibility\" below for more information.)",
-	"params": [{
-		"name": "stream",
-		"type": "Stream",
-		"default": "",
-		"des": "An \"old style\" readable stream.",
-		"properties": []
-	}],
-	"returns": [{
-		"type": "{null}"
 	}]
 }, {
 	"name": "countResultCallback",
