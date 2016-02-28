@@ -1,9 +1,10 @@
 {
   "name": "gqc-mongodb",
-  "version": "1.2.4.1",
+  "version": "1.2.6",
   "description": "GQ Mongodb Component",
   "main": "index.js",
   "scripts": {
+    "preinstall": "node ./preinstall.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

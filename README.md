@@ -39,7 +39,7 @@ yield clo.find({}).limit(2).skip(2).toArray();
 
 ## 服务端安装
 ```
-npm install gqc-mongodb --save-dev
+npm install gqc-mongodb --save --server
 ```
 
 ## 服务端（提供Mongodb数据服务的一端）使用
