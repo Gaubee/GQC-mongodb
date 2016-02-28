@@ -1,6 +1,6 @@
 {
   "name": "gqc-mongodb",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "GQ Mongodb Component",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/Gaubee/GQC-mongodb#readme",
   "dependencies": {
+  },
+  "optionalDependencies": {
     "mongodb": "^2.1.7"
   }
 }
