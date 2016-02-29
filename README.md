@@ -35,7 +35,37 @@ console.log(_insert);
 yield clo.find({}).toArray();
 yield clo.find({}).limit(2).skip(2).toArray();
 
+yield col.find({
+    _id: ["ObjectID", "@", 56d3de33f37222a4521b2012] // BSON的对象在JSON中的表达方式
+});
+
 ```
+
+### BSON
+
+Mongodb中有以下几种特殊的数据类型：
+* Binary
+* Code
+* Map
+* DBRef
+* Double
+* Long
+* MinKey
+* MaxKey
+* ObjectID
+* ObjectId
+* Symbol
+* Timestamp
+
+使用JSON表达的方式统一的格式：
+```js
+[ TYPE_NAME , "@" , ...args ]
+
+// == 转化为代码 ==>
+
+mongodb[TYPE_NAME]( ...args )
+```
+
 
 ## 服务端安装
 ```
