@@ -109,6 +109,8 @@ function install(client) {
 			client.afterOrderComponentProxy(db_proxy, "collection", collection_config => {
 				return initCollectionComponent([collection_config]);
 			});
+			client.__current_mongodb_db = db_proxy;
+			mongodbDbColWeakMap.set(db_proxy, new Map());
 			return db_proxy;
 		});
 
@@ -130,6 +132,8 @@ function install(client) {
 
 					}, col_find_cursor_proto);
 				});
+
+				mongodbDbColWeakMap.get(client.__current_mongodb_db).set(args[0].name, collection_proxy);
 				return collection_proxy;
 			});
 		};
@@ -150,6 +154,39 @@ function install(client) {
 		};
 	};
 
+	const mongodbDbColWeakMap = client.mongodbDbColWeakMap = new WeakMap();
+
+	client.mongodbPupulates = co.wrap(function*(obj, keys, db) {
+		db || (db = client.__current_mongodb_db);
+		const cols = mongodbDbColWeakMap.get(db);
+
+		if (String.isString(keys)) {
+			keys = [keys];
+		}
+		yield keys.map(co.wrap(function*(key) {
+			const value = obj[key];
+			if (value && value.$ref && value.$id) {
+				try {
+					obj[key] = yield cols.get(value.$ref).findOne({
+						_id: ["ObjectID", "@", value.$id]
+					});
+				} catch (e) {
+					obj[key] = null;
+				}
+			}
+		}));
+		return obj;
+	});
+	client.mongodbPupulateAll = function(obj, db) {
+		const keys = [];
+		for (var key in obj) {
+			var value = obj[key];
+			if (value.$ref && value.$id) {
+				keys.push(key);
+			}
+		}
+		return keys.length ? client.mongodbPupulates(obj, keys, db) : Promise.resolve(obj);
+	};
 };
 
 
