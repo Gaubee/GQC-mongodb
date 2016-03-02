@@ -1,5 +1,5 @@
-require("GQ-core");
-const tcp = require("GQ-core/tcp");
+require("gq-core");
+const tcp = require("gq-core/tcp");
 const gq_mongodb = require("../index.js");
 
 const client = tcp.createClient({
