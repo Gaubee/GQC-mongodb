@@ -1,6 +1,6 @@
 {
   "name": "gqc-mongodb",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "GQ Mongodb Component",
   "main": "index.js",
   "scripts": {

@@ -181,7 +181,7 @@ function install(client) {
 		const keys = [];
 		for (var key in obj) {
 			var value = obj[key];
-			if (value.$ref && value.$id) {
+			if (value && value.$ref && value.$id) {
 				keys.push(key);
 			}
 		}
